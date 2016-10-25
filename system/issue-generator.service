@@ -1,0 +1,8 @@
+[Unit]
+Description=Generate issue file for login session
+Before=systemd-user-sessions.service
+After=sshd.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/issue-generator

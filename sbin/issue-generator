@@ -1,0 +1,50 @@
+#!/bin/bash
+
+#
+# generate issue file on stdout
+# snippets needs to be put in /run/issue.d/
+# snippets are sorted for output
+# the script assumes this directory exist already, else it will fail
+#
+
+. /etc/os-release
+
+generate_issue() {
+    myarch=`uname -m | sed -e 's|_|-|g'`
+    echo
+    echo "Welcome to $PRETTY_NAME ($myarch) - Kernel \r (\l)."
+    echo
+    for snippet in /run/issue.d/* ; do
+	test -f "$snippet" && cat "$snippet"
+    done
+    echo -e "\n"
+}
+
+usage() {
+    echo "Usage: issue-generator [network add|remove interface]"
+    exit $1
+}
+
+case "$1" in
+   network)
+	if [ $# -ne 3 ]; then
+	    usage 1;
+	fi
+
+	case "$2" in
+	    add)
+		echo "${3}: \\4{${3}} \\6{${3}}" > "/run/issue.d/70-${3}.conf"
+		;;
+	    del)
+		rm -f "/run/issue.d/70-${3}.conf"
+		;;
+	esac
+	;;
+   *)
+	if [ $# -ge 1 ]; then
+		usage 1;
+	fi
+	;;
+esac
+
+generate_issue > /run/issue
