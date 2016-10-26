@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+                   "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+
+<!--  \-*\- nroff \-*\- -->
+<!--  Copyright 2016 Thorsten Kukuk &lt;kukuk@suse.de&gt; -->
+
+<!--  This file is part of issue\-generator. -->
+
+<!--  issue\-generator is free software; you can redistribute it and/or -->
+<!--  modify it under the terms of the GNU General Public License as -->
+<!--  published by the Free Software Foundation; either version 2 of the -->
+<!--  License, or (at your option) any later version. -->
+
+<!--  issue\-generator is distributed in the hope that it will be useful, -->
+<!--  but WITHOUT ANY WARRANTY; without even the implied warranty of -->
+<!--  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU -->
+<!--  General Public License for more details. -->
+
+<!--  You should have received a copy of the GNU General Public -->
+<!--  License along with issue\-generator; see the file COPYING.  If not, -->
+<!--  write to the Free Software Foundation, Inc., 51 Franklin Street \- Suite 500, -->
+<!--  Boston, MA 02111\-1307, USA. -->
+
+<refentry id='issued5'>
+  <refmeta>
+    <refentrytitle>issue.d</refentrytitle>
+    <manvolnum>5</manvolnum>
+    <refmiscinfo class='sectdesc'>issue-generator</refmiscinfo>
+  </refmeta>
+
+  <refnamediv id='name'>
+    <refname>issue.d</refname>
+    <refpurpose>Configuration for creating an issue file</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv>
+    <para><filename>/etc/issue.d/*</filename></para>
+    <para><filename>/run/issue.d/*</filename></para>
+    <para><filename>/usr/lib/issue.d/*</filename></para>
+  </refsynopsisdiv>
+
+  <refsect1 id='description'>
+    <title>DESCRIPTION</title>
+    <para>
+      The file <filename>/etc/issue</filename> is read from
+      <citerefentry><refentrytitle>agetty</refentrytitle><manvolnum>8</manvolnum></citerefentry>
+      and similar tools and shown above the login prompt. While some of the
+      informations can be adjusted with variables, the file itself is static. To
+      display dynamic content,
+      <citerefentry><refentrytitle>issue-generator</refentrytitle><manvolnum>1</manvolnum></citerefentry>
+      generates a <filename>/run/issue</filename> file from different files.
+    </para>
+
+    <para>
+      Files in <filename>/etc/issue.d</filename> override files with the same
+      name in <filename>/usr/lib/issue.d</filename> and
+      <filename>/run/issue.d</filename>. Files in
+      <filename>/run/issue.d</filename> override files with the same name in
+      <filename>/usr/lib/issue.d</filename>. Packages should install their
+      configuration files in <filename>/usr/lib/issue.d</filename>. Files in
+      <filename>/etc/issue.d</filename> are reserved for the local
+      administrator, who may use this logic to override the files installed by
+      vendor packages. All configuration files are sorted by their filename
+      in lexicographic order, regardless of which of the directories they reside in.
+    </para>
+  </refsect1>
+
+  <refsect1 id='see_also'>
+    <title>SEE ALSO</title>
+    <para>
+      <citerefentry><refentrytitle>agetty</refentrytitle><manvolnum>8</manvolnum></citerefentry>,
+      <citerefentry><refentrytitle>issue-generator</refentrytitle><manvolnum>1</manvolnum></citerefentry>
+    </para>
+  </refsect1>
+
+  <refsect1 id='author'>
+    <title>AUTHOR</title>
+    <para>
+      <emphasis remap='B'>issue-generator</emphasis>
+      was written by Thorsten Kukuk &lt;kukuk@suse.com&gt;.
+    </para>
+  </refsect1>
+</refentry>
