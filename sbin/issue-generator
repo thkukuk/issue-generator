@@ -22,12 +22,15 @@ find_files() {
 
 generate_issue() {
     for key in "${!FILES[@]}"; do
+	keys="${keys}\n${key}";
+    done
+    for key in `echo -e ${keys} | sort -u`; do
 	cat "${FILES[$key]}"
     done
 }
 
 usage() {
-    echo "Usage: issue-generator"
+    echo "Usage: issue-generator [--prefix <path]"
     echo "           issue-generator network add|remove interface"
     exit $1
 }

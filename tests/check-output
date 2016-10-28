@@ -17,6 +17,8 @@ echo "Line3: This is correct." >> check-output.expected
 
 ../sbin/issue-generator --prefix .
 
+mv ./run/issue check-output.issue
+
 rm -rf ./etc ./usr ./run
 
-diff ./run/issue check-output.expected > /dev/null
+diff check-output.issue check-output.expected > /dev/null
