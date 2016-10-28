@@ -1,0 +1,22 @@
+#!/bin/bash
+
+rm -rf ./etc ./usr ./run
+mkdir -p ./etc/issue.d
+mkdir -p ./usr/lib/issue.d
+mkdir -p ./run/issue.d
+
+echo "Line1: This is correct." > ./etc/issue.d/80-test.conf
+echo "Line1: This is wrong!" > ./usr/lib/issue.d/80-test.conf
+echo "Line1: This is wrong!" > ./run/issue.d/80-test.conf
+echo "Line2: This is correct." > ./run/issue.d/81-test.conf
+echo "Line3: This is correct." > ./usr/lib/issue.d/82-test.conf
+
+echo "Line1: This is correct." > check-output.expected
+echo "Line2: This is correct." >> check-output.expected
+echo "Line3: This is correct." >> check-output.expected
+
+../sbin/issue-generator --prefix .
+
+rm -rf ./etc ./usr ./run
+
+diff ./run/issue check-output.expected > /dev/null

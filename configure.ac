@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT(issue-generator, 0.1, kukuk@suse.de)
+AC_INIT(issue-generator, 0.1)
 AM_INIT_AUTOMAKE
 AC_CONFIG_SRCDIR([sbin/issue-generator])
 AC_PREFIX_DEFAULT(/usr)
@@ -25,4 +25,4 @@ JH_CHECK_XML_CATALOG([http://docbook.sourceforge.net/release/xsl/current/manpage
                 [DocBook XSL Stylesheets], [], enable_man=no)
 AM_CONDITIONAL(ENABLE_REGENERATE_MAN, test x$enable_man != xno)
 
-AC_OUTPUT([Makefile man/Makefile])
+AC_OUTPUT([Makefile man/Makefile tests/Makefile])

@@ -2,49 +2,68 @@
 
 #
 # generate issue file on stdout
-# snippets needs to be put in /run/issue.d/
+# snippets needs to be put in /etc/issue.d, /run/issue.d/ or
+# /usr/lib/issue.d
 # snippets are sorted for output
 # the script assumes this directory exist already, else it will fail
 #
 
-. /etc/os-release
+PREFIX=""
+
+declare -A FILES
+
+find_files() {
+    for f in ${PREFIX}/usr/lib/issue.d/* ${PREFIX}/run/issue.d/* ${PREFIX}/etc/issue.d/* ; do
+	test -f "$f" || continue
+	T=`basename "$f"`
+	FILES[${T}]="$f"
+    done
+}
 
 generate_issue() {
-    myarch=`uname -m | sed -e 's|_|-|g'`
-    echo
-    echo "Welcome to $PRETTY_NAME ($myarch) - Kernel \r (\l)."
-    echo
-    for snippet in /run/issue.d/* ; do
-	test -f "$snippet" && cat "$snippet"
+    for key in "${!FILES[@]}"; do
+	cat "${FILES[$key]}"
     done
-    echo -e "\n"
 }
 
 usage() {
-    echo "Usage: issue-generator [network add|remove interface]"
+    echo "Usage: issue-generator"
+    echo "           issue-generator network add|remove interface"
     exit $1
 }
 
-case "$1" in
-   network)
-	if [ $# -ne 3 ]; then
-	    usage 1;
-	fi
+while [ 1 ]; do
+    if [ $# -eq 0 ]; then
+        break
+    fi
 
-	case "$2" in
-	    add)
-		echo "${3}: \\4{${3}} \\6{${3}}" > "/run/issue.d/70-${3}.conf"
-		;;
-	    del)
-		rm -f "/run/issue.d/70-${3}.conf"
-		;;
-	esac
-	;;
-   *)
-	if [ $# -ge 1 ]; then
+    case "$1" in
+	network)
+	    if [ $# -ne 3 ]; then
 		usage 1;
-	fi
-	;;
-esac
+	    fi
 
-generate_issue > /run/issue
+	    case "$2" in
+		add)
+		    echo "${3}: \\4{$3} \\6{$3}" > "${PREFIX}/run/issue.d/70-$3.conf"
+		    ;;
+		del|delete|rm|remove)
+		    rm -f "${PREFIX}/run/issue.d/70-$3.conf"
+		    ;;
+	    esac
+	    shift 3;
+	    ;;
+	--prefix)
+	    PREFIX=$2
+	    shift 2
+	    ;;
+	*)
+	    if [ $# -ge 1 ]; then
+		usage 1;
+	    fi
+	    ;;
+    esac
+done
+
+find_files
+generate_issue > ${PREFIX}/run/issue

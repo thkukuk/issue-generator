@@ -22,6 +22,9 @@ config.h
 core
 config.log
 config.status
+test-driver
+test-suite.log
+check-output.*
 man/issue.d.5
 man/issue-generator.1
 
