@@ -10,14 +10,17 @@ then
   if test "${exec_prefix}" = "NONE"
   then
     TMPFILESDIR=/usr/lib/tmpfiles.d
+    ISSUEDIR=/usr/lib/issue.d
   else
     TMPFILESDIR=${exec_prefix}/lib/tmpfiles.d
+    ISSUEDIR=${exec_prefix}/lib/issue.d
   fi
 else
   TMPFILESDIR=${libexecdir}/tmpfiles.d
+  ISSUEDIR=${libexecdir}/issue.d
 fi
 AC_SUBST(TMPFILESDIR)
-
+AC_SUBST(ISSUEDIR)
 
 AC_SUBST(PACKAGE)
 AC_SUBST(VERSION)

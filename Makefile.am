@@ -14,3 +14,8 @@ M4_FILES = m4/jh_path_xml_catalog.m4
 EXTRA_DIST = ChangeLog $(M4_FILES)
 
 ACLOCAL_AMFLAGS = -I m4
+
+install-data-local:
+	$(mkinstalldirs) $(DESTDIR)$(ISSUEDIR)
+	$(mkinstalldirs) $(DESTDIR)/etc/issue.d
+ 
