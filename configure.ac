@@ -4,6 +4,9 @@ AM_INIT_AUTOMAKE
 AC_CONFIG_SRCDIR([sbin/issue-generator])
 AC_PREFIX_DEFAULT(/usr)
 
+AC_SUBST(PACKAGE)
+AC_SUBST(VERSION)
+
 if test ${libexecdir} = '${exec_prefix}/libexec'
 then
   libexecdir='${exec_prefix}/lib'
@@ -11,19 +14,20 @@ then
   then
     TMPFILESDIR=/usr/lib/tmpfiles.d
     ISSUEDIR=/usr/lib/issue.d
+    UDEVRULESDIR=/usr/lib/udev/rules.d
   else
     TMPFILESDIR=${exec_prefix}/lib/tmpfiles.d
     ISSUEDIR=${exec_prefix}/lib/issue.d
+    UDEVRULESDIR=${exec_prefix}/lib/udev/rules.d
   fi
 else
   TMPFILESDIR=${libexecdir}/tmpfiles.d
   ISSUEDIR=${libexecdir}/issue.d
+  UDEVRULESDIR=${libexecdir}/udev/rules.d
 fi
 AC_SUBST(TMPFILESDIR)
 AC_SUBST(ISSUEDIR)
-
-AC_SUBST(PACKAGE)
-AC_SUBST(VERSION)
+AC_SUBST(UDEVRULESDIR)
 
 AC_PROG_INSTALL
 
@@ -44,4 +48,4 @@ JH_CHECK_XML_CATALOG([http://docbook.sourceforge.net/release/xsl/current/manpage
 AM_CONDITIONAL(ENABLE_REGENERATE_MAN, test x$enable_man != xno)
 
 AC_OUTPUT([Makefile sbin/Makefile man/Makefile tmpfiles.d/Makefile \
-	tests/Makefile])
+	udev/Makefile tests/Makefile])
