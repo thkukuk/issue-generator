@@ -5,11 +5,11 @@
 #
 AUTOMAKE_OPTIONS = 1.6 foreign check-news dist-bzip2
 #
-SUBDIRS = man tests
+SUBDIRS = sbin man tmpfiles.d tests
 
 CLEANFILES = *~
 
-M4_FILES = jh_path_xml_catalog.m4
+M4_FILES = m4/jh_path_xml_catalog.m4
 
 EXTRA_DIST = ChangeLog $(M4_FILES)
 

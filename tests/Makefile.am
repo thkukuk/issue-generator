@@ -7,3 +7,5 @@
 CLEANFILES = check-output.log check-output.trs check-output.expected
 
 TESTS = check-output
+
+EXTRA_DIST = $(TESTS)
