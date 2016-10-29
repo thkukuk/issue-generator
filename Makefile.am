@@ -5,7 +5,7 @@
 #
 AUTOMAKE_OPTIONS = 1.6 foreign check-news dist-bzip2
 #
-SUBDIRS = sbin man udev tmpfiles.d tests
+SUBDIRS = sbin man udev systemd tmpfiles.d tests
 
 CLEANFILES = *~
 

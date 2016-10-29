@@ -15,19 +15,23 @@ then
     TMPFILESDIR=/usr/lib/tmpfiles.d
     ISSUEDIR=/usr/lib/issue.d
     UDEVRULESDIR=/usr/lib/udev/rules.d
+    SYSTEMDDIR=/usr/lib/systemd/system
   else
     TMPFILESDIR=${exec_prefix}/lib/tmpfiles.d
     ISSUEDIR=${exec_prefix}/lib/issue.d
     UDEVRULESDIR=${exec_prefix}/lib/udev/rules.d
+    SYSTEMDDIR=${exec_prefix}/lib/systemd/system
   fi
 else
   TMPFILESDIR=${libexecdir}/tmpfiles.d
   ISSUEDIR=${libexecdir}/issue.d
   UDEVRULESDIR=${libexecdir}/udev/rules.d
+  SYSTEMDDIR=${libexecdir}/systemd/system
 fi
 AC_SUBST(TMPFILESDIR)
 AC_SUBST(ISSUEDIR)
 AC_SUBST(UDEVRULESDIR)
+AC_SUBST(SYSTEMDDIR)
 
 AC_PROG_INSTALL
 
@@ -48,4 +52,4 @@ JH_CHECK_XML_CATALOG([http://docbook.sourceforge.net/release/xsl/current/manpage
 AM_CONDITIONAL(ENABLE_REGENERATE_MAN, test x$enable_man != xno)
 
 AC_OUTPUT([Makefile sbin/Makefile man/Makefile tmpfiles.d/Makefile \
-	udev/Makefile tests/Makefile])
+	udev/Makefile systemd/Makefile tests/Makefile])

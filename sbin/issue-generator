@@ -56,6 +56,23 @@ while [ 1 ]; do
 	    esac
 	    shift 3;
 	    ;;
+	ssh)
+	    if [ $# -ne 2 ]; then
+		usage 1;
+	    fi
+
+	    case "$2" in
+		add)
+		    for KEY_FILE in $(find /etc/ssh -name 'ssh_host_*_key') ; do
+			ssh-keygen -l -f ${KEY_FILE};
+		    done | awk '{print "SSH host key: " $2 " " $5}' > ${PREFIX}/run/issue.d/60-ssh_host_keys.conf
+		    ;;
+		del|delete|rm|remove)
+		    rm -f ${PREFIX}/run/issue.d/60-ssh_host_keys.conf
+		    ;;
+	    esac
+	    shift 2;
+	    ;;
 	--prefix)
 	    PREFIX=$2
 	    shift 2

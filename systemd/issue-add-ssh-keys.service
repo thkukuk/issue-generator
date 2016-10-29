@@ -1,0 +1,8 @@
+[Unit]
+Description=Add host ssh key fingerprint to  issue file
+Before=systemd-user-sessions.service
+After=sshd.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/issue-generator ssh add
