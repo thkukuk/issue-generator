@@ -48,6 +48,7 @@ while [ 1 ]; do
 
 	    case "$2" in
 		add)
+		    mkdir -p ${PREFIX}/run/issue.d
 		    echo "${3}: \\4{$3} \\6{$3}" > "${PREFIX}/run/issue.d/70-$3.conf"
 		    ;;
 		del|delete|rm|remove)
@@ -63,9 +64,11 @@ while [ 1 ]; do
 
 	    case "$2" in
 		add)
+		    mkdir -p ${PREFIX}/run/issue.d
+		    echo > ${PREFIX}/run/issue.d/60-ssh_host_keys.conf
 		    for KEY_FILE in $(find /etc/ssh -name 'ssh_host_*_key') ; do
 			ssh-keygen -l -f ${KEY_FILE};
-		    done | awk '{print "SSH host key: " $2 " " $5}' > ${PREFIX}/run/issue.d/60-ssh_host_keys.conf
+		    done | awk '{print "SSH host key: " $2 " " $5}' >> ${PREFIX}/run/issue.d/60-ssh_host_keys.conf
 		    ;;
 		del|delete|rm|remove)
 		    rm -f ${PREFIX}/run/issue.d/60-ssh_host_keys.conf

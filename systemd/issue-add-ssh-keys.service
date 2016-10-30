@@ -6,3 +6,6 @@ After=sshd.service
 [Service]
 Type=oneshot
 ExecStart=/usr/sbin/issue-generator ssh add
+
+[Install]
+WantedBy=default.target

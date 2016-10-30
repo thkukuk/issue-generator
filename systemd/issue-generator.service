@@ -5,3 +5,6 @@ Before=systemd-user-sessions.service
 [Service]
 Type=oneshot
 ExecStart=/usr/sbin/issue-generator
+
+[Install]
+WantedBy=default.target
