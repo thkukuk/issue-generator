@@ -4,4 +4,4 @@
 
 sbin_SCRIPTS = issue-generator
 
-EXTRA_DIST = $(SCRIPTS)
+EXTRA_DIST = issue-generator.in

@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(issue-generator, 0.1)
 AM_INIT_AUTOMAKE
-AC_CONFIG_SRCDIR([sbin/issue-generator])
+AC_CONFIG_SRCDIR([sbin/issue-generator.in])
 AC_PREFIX_DEFAULT(/usr)
 
 AC_SUBST(PACKAGE)
@@ -52,4 +52,5 @@ JH_CHECK_XML_CATALOG([http://docbook.sourceforge.net/release/xsl/current/manpage
 AM_CONDITIONAL(ENABLE_REGENERATE_MAN, test x$enable_man != xno)
 
 AC_OUTPUT([Makefile sbin/Makefile man/Makefile tmpfiles.d/Makefile \
-	udev/Makefile systemd/Makefile tests/Makefile])
+	udev/Makefile systemd/Makefile tests/Makefile \
+	sbin/issue-generator])

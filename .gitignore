@@ -26,6 +26,10 @@ test-driver
 test-suite.log
 check-output.*
 man/issue.d.5
-man/issue-generator.1
-
+man/issue-generator.8
+man/issue-add-ssh-keys.service.8
+man/issue-generator.service.8
+man/90-issue-generator.rules.8
+man/issue-generator.conf.8
+sbin/issue-generator
 issue-generator-*.tar.*
