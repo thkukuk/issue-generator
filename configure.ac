@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT(issue-generator, 0.1)
+AC_INIT(issue-generator, 1.0)
 AM_INIT_AUTOMAKE
 AC_CONFIG_SRCDIR([sbin/issue-generator.in])
 AC_PREFIX_DEFAULT(/usr)
@@ -12,10 +12,10 @@ then
   libexecdir='${exec_prefix}/lib'
   if test "${exec_prefix}" = "NONE"
   then
-    TMPFILESDIR=/usr/lib/tmpfiles.d
-    ISSUEDIR=/usr/lib/issue.d
-    UDEVRULESDIR=/usr/lib/udev/rules.d
-    SYSTEMDDIR=/usr/lib/systemd/system
+    TMPFILESDIR=${prefix}/lib/tmpfiles.d
+    ISSUEDIR=${prefix}/lib/issue.d
+    UDEVRULESDIR=${prefix}/lib/udev/rules.d
+    SYSTEMDDIR=${prefix}/lib/systemd/system
   else
     TMPFILESDIR=${exec_prefix}/lib/tmpfiles.d
     ISSUEDIR=${exec_prefix}/lib/issue.d

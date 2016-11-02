@@ -17,5 +17,5 @@ ACLOCAL_AMFLAGS = -I m4
 
 install-data-local:
 	$(mkinstalldirs) $(DESTDIR)$(ISSUEDIR)
-	$(mkinstalldirs) $(DESTDIR)/etc/issue.d
+	$(mkinstalldirs) $(DESTDIR)${sysconfdir}/issue.d
  
