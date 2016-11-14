@@ -30,7 +30,7 @@ generate_issue() {
 }
 
 usage() {
-    echo "Usage: issue-generator [--prefix <path]"
+    echo "Usage: issue-generator [--prefix <path>]"
     echo "       issue-generator network add|remove interface"
     echo "       issue-generator ssh add|remove"
     exit $1
