@@ -1,5 +1,5 @@
 [Unit]
-Description=Add host ssh key fingerprint to  issue file
+Description=Add host ssh key fingerprint to issue file
 Before=systemd-user-sessions.service
 After=sshd.service
 
