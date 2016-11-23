@@ -2,6 +2,9 @@ issue-generator NEWS -- history of user-visible changes.
 
 Copyright (C) 2016 Thorsten Kukuk
 
+Version 1.2
+* Add README.md
+
 Version 1.1
 * Fix several typos
 * Reload agetty if we re-create /run/issue
