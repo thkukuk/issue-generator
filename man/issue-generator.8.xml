@@ -17,12 +17,23 @@
 <!--  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU -->
 <!--  General Public License for more details. -->
 
-<!--  You should have received a copy of the GNU General Public -->
-<!--  License along with issue\-generator; see the file COPYING.  If not, -->
-<!--  write to the Free Software Foundation, Inc., 51 Franklin Street \- Suite 500, -->
-<!--  Boston, MA 02111\-1307, USA. -->
+<!--  You should have received a copy of the GNU General Public License -->
+<!-- along with rebootmgr; If not, see <http://www.gnu.org/licenses/>.  -->
 
-<refentry id='issue-generator8'>
+<refentry id='issue-generator.8'>
+  <refentryinfo>
+    <title>issue-generator</title>
+    <productname>issue-generator</productname>
+
+    <authorgroup>
+      <author>
+        <contrib></contrib>
+        <firstname>Thorsten</firstname>
+        <surname>Kukuk</surname>
+        <email>kukuk@suse.de</email>
+      </author>
+    </authorgroup>
+  </refentryinfo>
 
   <refmeta>
     <refentrytitle>issue-generator</refentrytitle>
@@ -114,11 +125,4 @@ temporary <filename>issue</filename> file as <filename>/run/issue</filename>.
 <citerefentry><refentrytitle>agetty</refentrytitle><manvolnum>8</manvolnum></citerefentry></para>
 </refsect1>
 
-  <refsect1 id='author'>
-    <title>AUTHOR</title>
-    <para>
-      <command>issue-generator</command> was written by
-      Thorsten Kukuk &lt;kukuk@suse.com&gt;.
-    </para>
-  </refsect1>
 </refentry>
