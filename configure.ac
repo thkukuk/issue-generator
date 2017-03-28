@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT(issue-generator, 1.2)
+AC_INIT(issue-generator, 1.3)
 AM_INIT_AUTOMAKE
 AC_CONFIG_SRCDIR([sbin/issue-generator.in])
 AC_PREFIX_DEFAULT(/usr)
