@@ -52,6 +52,13 @@ while [ 1 ]; do
 		usage 1;
 	    fi
 
+	    if [ -f /etc/sysconfig/issue-generator ]; then
+		. /etc/sysconfig/issue-generator
+	    else
+		NETWORK_INTERFACE_REGEX="^[be]"
+	    fi
+	    [[ ${3} =~ ${NETWORK_INTERFACE_REGEX} ]] || exit 0
+
 	    case "$2" in
 		add)
 		    mkdir -p ${PREFIX}/run/issue.d

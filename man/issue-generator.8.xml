@@ -3,7 +3,7 @@
                    "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 
 <!--  \-*\- nroff \-*\- -->
-<!--  Copyright 2016 Thorsten Kukuk &lt;kukuk@suse.de&gt; -->
+<!--  Copyright 2016, 2017 Thorsten Kukuk &lt;kukuk@suse.de&gt; -->
 
 <!--  This file is part of issue\-generator. -->
 
@@ -106,6 +106,12 @@ temporary <filename>issue</filename> file as <filename>/run/issue</filename>.
       the escape codes for
       <citerefentry><refentrytitle>agetty</refentrytitle><manvolnum>8</manvolnum></citerefentry>
       to insert the IPv4 and IPv6 addresses.</para>
+      <para>By default, only network interfaces where the name starts with 'b'
+      or 'e' are added. Which interfaces are shown is configureable via a
+      regex expression in in the variable
+      <replaceable>NETWORK_INTERFACE_REGEX</replaceable> in
+      <filename>/etc/sysconfig/issue-generator</filename>.
+      </para>
     </listitem>
   </varlistentry>
   <varlistentry>
