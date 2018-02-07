@@ -108,4 +108,4 @@ done
 
 find_files
 generate_issue > ${PREFIX}/run/issue
-/usr/sbin/agetty --reload > /dev/null || :
+[ -x /usr/sbin/agetty ] && /usr/sbin/agetty --reload > /dev/null || :
