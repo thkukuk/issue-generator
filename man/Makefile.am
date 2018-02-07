@@ -6,7 +6,7 @@
 
 CLEANFILES = $(MANS) $(DATA) issue-generator.index.xml
 
-EXTRA_DIST = $(MANS) $(XMLS) custom-html.xsl \
+EXTRA_DIST = $(MANS) $(XMLS) $(DATA) custom-html.xsl \
 	make-man-index.py xml_helper.py issue-generator.index.xml
 
 man_MANS = issue.d.5 issue-generator.8 issue-generator.service.8 \
