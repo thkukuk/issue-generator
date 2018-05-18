@@ -107,5 +107,25 @@ while [ 1 ]; do
 done
 
 find_files
-generate_issue > ${PREFIX}/run/issue
-[ -x /usr/sbin/agetty ] && /usr/sbin/agetty --reload > /dev/null || :
+# We should only create a new /run/issue file, if something has
+# really changed. And reload only in this case
+BACKUPFILE=`mktemp -q ${PREFIX}/run/issue.XXXXXXXXXX`
+if [ $? -ne 0 ]; then
+    echo "issue-generator: Can't create temp file..."
+    # Safe fallback: generate new file and reload
+    generate_issue > ${PREFIX}/run/issue
+    RELOAD=1
+else
+    generate_issue > ${BACKUPFILE}
+    cmp -s ${BACKUPFILE} ${PREFIX}/run/issue
+    if [ $? -ne 0 ]; then
+	mv ${BACKUPFILE} ${PREFIX}/run/issue
+	RELOAD=1
+    else
+	rm -f ${BACKUPFILE}
+	RELOAD=0
+    fi
+fi
+if [ ${RELOAD} -eq 1 ]; then
+    [ -x /usr/sbin/agetty ] && /usr/sbin/agetty --reload > /dev/null || :
+fi
