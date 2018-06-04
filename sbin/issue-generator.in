@@ -119,6 +119,7 @@ else
     generate_issue > ${BACKUPFILE}
     cmp -s ${BACKUPFILE} ${PREFIX}/run/issue
     if [ $? -ne 0 ]; then
+	chmod 644 ${BACKUPFILE}
 	mv ${BACKUPFILE} ${PREFIX}/run/issue
 	RELOAD=1
     else
