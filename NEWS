@@ -2,6 +2,9 @@ issue-generator NEWS -- history of user-visible changes.
 
 Copyright (C) 2016-2018 Thorsten Kukuk
 
+Version 1.6
+* Fix permission of /run/issue
+
 Version 1.5
 * Don't replace /run/issue or reload agetty if there were no changes
 
