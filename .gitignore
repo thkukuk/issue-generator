@@ -16,6 +16,7 @@ config.h
 *.lo
 *.la
 *.a
+*.pyc
 *~
 *.rej
 *.orig
@@ -33,3 +34,10 @@ man/90-issue-generator.rules.8
 man/issue-generator.conf.8
 sbin/issue-generator
 issue-generator-*.tar.*
+man/90-issue-generator.rules.8.html
+man/issue-add-ssh-keys.service.8.html
+man/issue-generator.8.html
+man/issue-generator.conf.8.html
+man/issue-generator.index.xml
+man/issue-generator.service.8.html
+man/issue.d.5.html
