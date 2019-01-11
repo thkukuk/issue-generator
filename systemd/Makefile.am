@@ -4,6 +4,7 @@
 
 systemddir = @SYSTEMDDIR@
 
-systemd_DATA = issue-add-ssh-keys.service issue-generator.service 
+systemd_DATA = issue-add-ssh-keys.service issue-generator.service \
+	       issue-generator.path
 
 EXTRA_DIST = $(DATA)

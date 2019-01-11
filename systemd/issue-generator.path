@@ -1,0 +1,13 @@
+[Unit]
+Description=Watch for changes in issue snippets
+After=local-fs.target
+
+[Path]
+Unit=issue-generator.service
+PathChanged=/etc/issue.d
+PathChanged=/usr/lib/issue.d
+PathChanged=/run/issue.d
+
+[Install]
+WantedBy=default.target
+
