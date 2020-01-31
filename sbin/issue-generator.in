@@ -31,7 +31,7 @@ generate_issue() {
 
 usage() {
     echo "Usage: issue-generator [--prefix <path>]"
-    echo "       issue-generator network add|remove interface"
+    echo "       issue-generator network add|remove interface|devpath"
     echo "       issue-generator ssh add|remove"
     exit $1
 }
@@ -57,15 +57,23 @@ while [ 1 ]; do
 	    else
 		NETWORK_INTERFACE_REGEX="^[be]"
 	    fi
-	    [[ ${3} =~ ${NETWORK_INTERFACE_REGEX} ]] || exit 0
+
+	    # Support both ifname (eth0) as well as devpath (/devices/virtual/net/lo)
+	    if [[ "${3}" =~ ^/ ]]; then
+	        ifname="${3##*/}"
+	    else
+	        ifname="${3}"
+	    fi
+
+	    [[ "${ifname}" =~ ${NETWORK_INTERFACE_REGEX} ]] || exit 0
 
 	    case "$2" in
 		add)
 		    mkdir -p ${PREFIX}/run/issue.d
-		    echo "${3}: \\4{$3} \\6{$3}" > "${PREFIX}/run/issue.d/70-$3.conf"
+		    echo "${ifname}: \\4{$ifname} \\6{$ifname}" > "${PREFIX}/run/issue.d/70-$ifname.conf"
 		    ;;
 		del|delete|rm|remove)
-		    rm -f "${PREFIX}/run/issue.d/70-$3.conf"
+		    rm -f "${PREFIX}/run/issue.d/70-$ifname.conf"
 		    ;;
 	    esac
 	    shift 3;
