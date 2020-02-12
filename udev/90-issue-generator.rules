@@ -1,2 +1,4 @@
 ACTION=="add", SUBSYSTEM=="net", RUN+="/usr/sbin/issue-generator network add $env{INTERFACE}"
 ACTION=="remove", SUBSYSTEM=="net", RUN+="/usr/sbin/issue-generator network del $env{INTERFACE}"
+ACTION=="move", SUBSYSTEM=="net", RUN+="/usr/sbin/issue-generator network del $env{DEVPATH_OLD}"
+ACTION=="move", SUBSYSTEM=="net", RUN+="/usr/sbin/issue-generator network add $env{INTERFACE}"
