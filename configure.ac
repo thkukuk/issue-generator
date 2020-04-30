@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT(issue-generator, 1.8)
+AC_INIT(issue-generator, 1.9)
 AM_INIT_AUTOMAKE
 AC_CONFIG_SRCDIR([sbin/issue-generator.in])
 AC_PREFIX_DEFAULT(/usr)
@@ -7,26 +7,17 @@ AC_PREFIX_DEFAULT(/usr)
 AC_SUBST(PACKAGE)
 AC_SUBST(VERSION)
 
-if test ${libexecdir} = '${exec_prefix}/libexec'
+if test "${exec_prefix}" = "NONE"
 then
-  libexecdir='${exec_prefix}/lib'
-  if test "${exec_prefix}" = "NONE"
-  then
-    TMPFILESDIR=${prefix}/lib/tmpfiles.d
-    ISSUEDIR=${prefix}/lib/issue.d
-    UDEVRULESDIR=${prefix}/lib/udev/rules.d
-    SYSTEMDDIR=${prefix}/lib/systemd/system
-  else
-    TMPFILESDIR=${exec_prefix}/lib/tmpfiles.d
-    ISSUEDIR=${exec_prefix}/lib/issue.d
-    UDEVRULESDIR=${exec_prefix}/lib/udev/rules.d
-    SYSTEMDDIR=${exec_prefix}/lib/systemd/system
-  fi
+  TMPFILESDIR=${prefix}/lib/tmpfiles.d
+  ISSUEDIR=${prefix}/lib/issue.d
+  UDEVRULESDIR=${prefix}/lib/udev/rules.d
+  SYSTEMDDIR=${prefix}/lib/systemd/system
 else
-  TMPFILESDIR=${libexecdir}/tmpfiles.d
-  ISSUEDIR=${libexecdir}/issue.d
-  UDEVRULESDIR=${libexecdir}/udev/rules.d
-  SYSTEMDDIR=${libexecdir}/systemd/system
+  TMPFILESDIR=${exec_prefix}/lib/tmpfiles.d
+  ISSUEDIR=${exec_prefix}/lib/issue.d
+  UDEVRULESDIR=${exec_prefix}/lib/udev/rules.d
+  SYSTEMDDIR=${exec_prefix}/lib/systemd/system
 fi
 AC_SUBST(TMPFILESDIR)
 AC_SUBST(ISSUEDIR)
