@@ -1,9 +1,9 @@
 ## Path:        System/Login
 ## Description: /etc/issue generator
 ## Type:        string
-## Default:     "^[be]"
+## Default:     "^[beqichw]"
 #
 # Defines a regex, for which network interfaces
 # /etc/issue should present the IP number
 #
-NETWORK_INTERFACE_REGEX="^[be]"
+NETWORK_INTERFACE_REGEX="^[beqichw]"
