@@ -13,9 +13,19 @@ PREFIX=""
 declare -A FILES
 
 find_files() {
-    for f in ${PREFIX}/usr/lib/issue.d/* ${PREFIX}/run/issue.d/* ${PREFIX}/etc/issue.d/* ; do
+    for f in "${PREFIX}"/usr/lib/issue.d/* "${PREFIX}"/run/issue.d/* "${PREFIX}"/etc/issue.d/* ; do
 	test -f "$f" || continue
-	T=`basename "$f"`
+	case "$f" in
+	    *.bak|*~|*.rpmsave|*.rpmnew)
+		echo "$f ignored"
+		continue
+		;;
+	    *.issue)
+		echo "$f ignored, printed by agetty"
+		continue
+		;;
+	esac
+	T=$(basename "$f")
 	FILES[${T}]="$f"
     done
 }
@@ -24,7 +34,7 @@ generate_issue() {
     for key in "${!FILES[@]}"; do
 	keys="${keys}\n${key}";
     done
-    for key in `echo -e ${keys} | sort -u`; do
+    for key in $(echo -e ${keys} | sort -u); do
 	cat "${FILES[$key]}"
     done
 }
@@ -41,7 +51,7 @@ print_version() {
     exit 0;
 }
 
-while [ 1 ]; do
+while true; do
     if [ $# -eq 0 ]; then
         break
     fi
@@ -69,7 +79,7 @@ while [ 1 ]; do
 
 	    case "$2" in
 		add)
-		    mkdir -p ${PREFIX}/run/issue.d
+		    mkdir -p "${PREFIX}"/run/issue.d
 		    echo "${ifname}: \\4{$ifname} \\6{$ifname}" > "${PREFIX}/run/issue.d/70-$ifname.conf"
 		    ;;
 		del|delete|rm|remove)
@@ -85,13 +95,13 @@ while [ 1 ]; do
 
 	    case "$2" in
 		add)
-		    mkdir -p ${PREFIX}/run/issue.d
+		    mkdir -p "${PREFIX}"/run/issue.d
 		    for KEY_FILE in $(find /etc/ssh -name 'ssh_host_*_key') ; do
-			ssh-keygen -l -f ${KEY_FILE};
-		    done | awk '{print "SSH host key: " $2 " " $4}' > ${PREFIX}/run/issue.d/60-ssh_host_keys.conf
+			ssh-keygen -l -f "${KEY_FILE}";
+		    done | awk '{print "SSH host key: " $2 " " $4}' > "${PREFIX}"/run/issue.d/60-ssh_host_keys.conf
 		    ;;
 		del|delete|rm|remove)
-		    rm -f ${PREFIX}/run/issue.d/60-ssh_host_keys.conf
+		    rm -f "${PREFIX}"/run/issue.d/60-ssh_host_keys.conf
 		    ;;
 	    esac
 	    shift 2;
@@ -117,21 +127,21 @@ done
 find_files
 # We should only create a new /run/issue file, if something has
 # really changed. And reload only in this case
-BACKUPFILE=`mktemp -q ${PREFIX}/run/issue.XXXXXXXXXX`
+BACKUPFILE=$(mktemp -q "${PREFIX}"/run/issue.XXXXXXXXXX)
 if [ $? -ne 0 ]; then
     echo "issue-generator: Can't create temp file..."
     # Safe fallback: generate new file and reload
-    generate_issue > ${PREFIX}/run/issue
+    generate_issue > "${PREFIX}"/run/issue
     RELOAD=1
 else
-    generate_issue > ${BACKUPFILE}
-    cmp -s ${BACKUPFILE} ${PREFIX}/run/issue
+    generate_issue > "${BACKUPFILE}"
+    cmp -s "${BACKUPFILE}" "${PREFIX}"/run/issue
     if [ $? -ne 0 ]; then
-	chmod 644 ${BACKUPFILE}
-	mv ${BACKUPFILE} ${PREFIX}/run/issue
+	chmod 644 "${BACKUPFILE}"
+	mv "${BACKUPFILE}" "${PREFIX}"/run/issue
 	RELOAD=1
     else
-	rm -f ${BACKUPFILE}
+	rm -f "${BACKUPFILE}"
 	RELOAD=0
     fi
 fi
