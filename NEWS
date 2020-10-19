@@ -2,6 +2,12 @@ issue-generator NEWS -- history of user-visible changes.
 
 Copyright (C) 2016-2020 Thorsten Kukuk
 
+Version 1.11
+* Don't display issue.d/*.issue files, agetty will do that [bsc#1177891]
+* Ignore /run/issue.d in issue-generator.path, else issue-generator will
+  be called too fast too often [bsc#1177865]
+* Ignore *.bak, *~ and *.rpm* files [bsc#1118862]
+
 Version 1.10
 * Display wlan interfaces, too [bsc#1169070]
 
