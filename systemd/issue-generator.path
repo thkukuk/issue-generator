@@ -6,7 +6,7 @@ After=local-fs.target
 Unit=issue-generator.service
 PathChanged=/etc/issue.d
 PathChanged=/usr/lib/issue.d
-PathChanged=/run/issue.d
+#PathChanged=/run/issue.d
 
 [Install]
 WantedBy=default.target
