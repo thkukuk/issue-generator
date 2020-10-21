@@ -34,7 +34,7 @@ define html-alias
 endef
 
 issue-generator.index.xml: make-man-index.py $(XMLS)
-	python $(srcdir)/make-man-index.py $(srcdir)/$@ $(XMLS)
+	python3 $(srcdir)/make-man-index.py $(srcdir)/$@ $(XMLS)
 
 issue.d.5: issue.d.5.xml
 	$(XSLTPROC) -o $(srcdir)/$@ --path $(srcdir) --xinclude --nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
