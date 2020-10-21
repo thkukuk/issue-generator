@@ -3,7 +3,7 @@
                    "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 
 <!--  \-*\- nroff \-*\- -->
-<!--  Copyright 2016, 2017 Thorsten Kukuk &lt;kukuk@suse.de&gt; -->
+<!--  Copyright 2016, 2017, 2020 Thorsten Kukuk &lt;kukuk@suse.de&gt; -->
 
 <!--  This file is part of issue\-generator. -->
 
@@ -84,9 +84,15 @@ creates a volatile and temporary
 file based on the input files and location specified in
 <citerefentry><refentrytitle>issue.d</refentrytitle><manvolnum>5</manvolnum></citerefentry>.
 </para>
-<para>If invoked with no arguments, it applies all input files and creates a
-temporary <filename>issue</filename> file as <filename>/run/issue</filename>.
+<para>If invoked with no arguments, it applies all valid input files and
+creates a temporary <filename>issue</filename> file as
+<filename>/run/issue</filename>.
 <filename>/etc/issue</filename> should be symlink to this file.</para>
+<para>Backup files ending on <filename>*.bak</filename>,
+<filename>*~</filename> or <filename>*.rpm*</filename> will be ignored. Like
+files ending on <filename>*.issue</filename>, as this are directly shown by
+<citerefentry><refentrytitle>agetty</refentrytitle><manvolnum>8</manvolnum></citerefentry>.
+</para>
 </refsect1>
 
 <refsect1 id='options'><title>OPTIONS</title>
