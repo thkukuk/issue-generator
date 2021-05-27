@@ -1,6 +1,9 @@
 issue-generator NEWS -- history of user-visible changes.
 
-Copyright (C) 2016-2020 Thorsten Kukuk
+Copyright (C) 2016-2021 Thorsten Kukuk
+
+Version 1.13
+* SELinux: Do not call agetty --reload [bsc#1186178]
 
 Version 1.12
 * Document changes about handling of issue.d/* files
