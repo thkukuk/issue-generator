@@ -145,6 +145,6 @@ else
 	RELOAD=0
     fi
 fi
-if [ ${RELOAD} -eq 1 ]; then
-    [ -x /usr/sbin/agetty ] && /usr/sbin/agetty --reload > /dev/null || :
+if [ ${RELOAD} -eq 1 ] && [ -e /run/agetty.reload ]; then
+    > /run/agetty.reload
 fi
